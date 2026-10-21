@@ -1,0 +1,6 @@
+{% load static %}<!doctype html>
+<html lang="{{ language }}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SmartChef · {{ labels.subtitle }}</title><link rel="stylesheet" href="{% static 'recipes/style.css' %}"></head>
+<body><div class="shell"><header><a href="/?language={{ language }}" class="brand">SmartChef <span>✦</span></a><nav aria-label="{{ labels.navigation }}"><a href="/?language={{ language }}">{{ labels.home }}</a><a href="/saved/?language={{ language }}">{{ labels.saved }}</a></nav></header>
+{% if demo %}<p class="demo">DEMO · {{ labels.fixture }}</p>{% endif %}
+{% block content %}{% endblock %}
+<footer>SmartChef · {{ labels.local }}</footer></div></body></html>
