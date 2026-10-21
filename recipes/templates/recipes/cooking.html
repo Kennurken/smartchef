@@ -1,0 +1,12 @@
+{% extends 'recipes/base.html' %}{% load static %}{% block content %}
+<div class="cooking-head"><p class="eyebrow">{{ labels.cooking }}</p><a id="cook-exit" href="{{ return_href }}">{{ labels.exit }}</a></div>
+{% if cooking_data %}<h1 class="cook-title">{{ cooking_data.title }}</h1>
+<section id="cooking-active" class="cooking-card" aria-labelledby="step-heading">
+<div class="progress-row"><span id="step-number" aria-live="polite"></span><span id="progress-label">{{ labels.progress }}</span></div><progress id="cook-progress" max="{{ cooking_data.steps|length }}" value="0" aria-labelledby="progress-label"></progress>
+<h2 id="step-heading" tabindex="-1">{{ labels.step }}</h2><p id="step-text" class="step-text"></p>
+<div class="cook-controls"><button id="cook-back" type="button">{{ labels.back }}</button><button id="cook-next" class="primary" type="button">{{ labels.next }}</button></div>
+</section><section id="cooking-complete" class="cooking-card complete" hidden><div class="complete-icon" aria-hidden="true">✓</div><h2 tabindex="-1" id="complete-heading">{{ labels.complete }}</h2><p>{{ labels.complete_note }}</p><p id="complete-count"></p><div class="cook-controls"><button id="cook-restart" type="button" class="primary">{{ labels.restart }}</button><a id="cook-return" class="button" href="{{ return_href }}">{{ labels.return_recipe }}</a></div></section>
+<details class="panel cook-details"><summary>{{ labels.steps_label }}</summary><ol>{% for step in cooking_data.steps %}<li>{{ step }}</li>{% endfor %}</ol></details>
+<noscript><p class="error">JavaScript: {{ labels.steps_label }} ↑</p></noscript>
+{{ cooking_data|json_script:'cooking-data' }}{{ labels|json_script:'cooking-labels' }}<script defer src="{% static 'recipes/cooking.js' %}"></script>
+{% else %}<section class="panel"><p role="alert">{{ labels.unavailable }}</p><a href="/saved/?language={{ language }}">{{ labels.return_recipe }}</a></section>{% endif %}{% endblock %}
