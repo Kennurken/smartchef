@@ -1,0 +1,1 @@
+document.querySelectorAll("[data-editor-propose]").forEach(form => form.addEventListener("submit", () => { const b=form.querySelector("button"); b.disabled=true; b.textContent="Ұсыныс алынуда…"; form.setAttribute("aria-busy","true"); }));
